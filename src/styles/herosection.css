@@ -1,0 +1,57 @@
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+main {
+   background-image: radial-gradient(circle, rgb(255, 0, 0) 1.5px, transparent 1px),
+   radial-gradient(circle, rgb(0, 255, 0) 1.5px, transparent 1px),
+   radial-gradient(circle, rgb(0, 0, 255) 1.5px, transparent 1px);
+   background-size: 20px 20px;
+   animation: glowing-animation 4s infinite alternate;
+}
+
+@keyframes glowing-animation {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        filter: hue-rotate(180deg);
+    }
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+h1 {
+    font-family: 'Plus Jakarta Sans';
+    font-style: italic;
+}
+
+
+@layer {
+    section {
+        @apply px-5 text-center flex items-center justify-center lg:text-start lg:justify-between lg:gap-30 lg:px-20;
+    }
+
+    h1 {
+        @apply font-semibold text-5xl;
+    }
+
+    p {
+        @apply mt-6 text-lg text-gray-700 max-w-xl;
+    }
+}
+
+
+

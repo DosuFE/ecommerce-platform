@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@layer components {
+  /* Header */
+  header {
+    @apply bg-white/80 backdrop-blur-md w-full fixed top-0 z-50 shadow-sm;
+  }
+
+  /* Navigation Container */
+  .nav-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Desktop Navigation */
+  .desktop-nav {
+    @apply hidden lg:flex items-center justify-between h-16;
+  }
+
+  .desktop-logo {
+    @apply flex-shrink-0;
+  }
+
+  .desktop-nav-links {
+    @apply hidden lg:flex space-x-8;
+  }
+
+  .desktop-nav-link {
+    @apply text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200;
+  }
+
+  .desktop-nav-link.active {
+    @apply text-blue-600 bg-blue-50;
+  }
+
+  .desktop-actions {
+    @apply hidden lg:flex items-center space-x-4;
+  }
+
+  /* Mobile Navigation */
+  .mobile-nav {
+    @apply flex lg:hidden items-center justify-between h-16 px-4;
+  }
+
+  .mobile-logo {
+    @apply flex-shrink-0;
+  }
+
+  .mobile-actions {
+    @apply flex items-center space-x-3;
+  }
+
+  /* Hamburger Menu */
+  .hamburger-btn {
+    @apply relative w-8 h-8 flex flex-col justify-center items-center cursor-pointer;
+  }
+
+  .hamburger-line {
+    @apply w-6 h-0.5 bg-gray-700 rounded transition-all duration-300;
+  }
+
+  .hamburger-line:nth-child(1) {
+    @apply transform-gpu;
+  }
+
+  .hamburger-line:nth-child(2) {
+    @apply my-1.5;
+  }
+
+  .hamburger-line:nth-child(3) {
+    @apply transform-gpu;
+  }
+
+  /* Hamburger Animation - Open State */
+  .hamburger-btn.open .hamburger-line:nth-child(1) {
+    @apply rotate-45 translate-y-2;
+  }
+
+  .hamburger-btn.open .hamburger-line:nth-child(2) {
+    @apply opacity-0;
+  }
+
+  .hamburger-btn.open .hamburger-line:nth-child(3) {
+    @apply -rotate-45 -translate-y-2;
+  }
+
+  /* Action Buttons */
+  .action-btn {
+    @apply p-2 text-gray-600 hover:text-gray-900 transition-colors duration-200;
+  }
+
+  /* Overlay */
+  .overlay {
+    @apply fixed inset-0 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-40 lg:hidden;
+  }
+
+  .overlay.show {
+    @apply opacity-100 pointer-events-auto;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    @apply fixed top-0 left-0 h-screen w-80 max-w-[90%] bg-white shadow-xl transform -translate-x-full transition-transform duration-300 ease-in-out z-50 flex flex-col lg:hidden;
+  }
+
+  .sidebar.open {
+    @apply translate-x-0;
+  }
+
+  .sidebar-header {
+    @apply flex items-center justify-between p-6 border-b border-gray-100;
+  }
+
+  .close-btn {
+    @apply p-2 text-gray-500 hover:text-gray-700 transition-colors duration-200;
+  }
+
+  .nav-links {
+    @apply flex flex-col space-y-2 p-6;
+  }
+
+  .nav-link {
+    @apply px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all duration-200 font-medium;
+  }
+
+  .nav-link.active {
+    @apply bg-blue-50 text-blue-600 border-l-4 border-blue-600;
+  }
+
+  /* Search Modal */
+  .search-modal {
+    @apply fixed inset-0 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-50;
+  }
+
+  .search-modal.show {
+    @apply opacity-100 pointer-events-auto;
+  }
+
+  .search-container {
+    @apply absolute top-0 left-0 right-0 bg-white shadow-lg transform -translate-y-full transition-transform duration-300 ease-in-out;
+  }
+
+  .search-container.open {
+    @apply translate-y-0;
+  }
+
+  .search-input-container {
+    @apply max-w-4xl mx-auto p-6;
+  }
+
+  .search-input {
+    @apply w-full px-4 py-3 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none;
+  }
+
+  .search-close-btn {
+    @apply absolute top-6 right-6 p-2 text-gray-500 hover:text-gray-700 transition-colors duration-200;
+  }
+
+  /* Search Results */
+  .search-results {
+    @apply max-w-4xl mx-auto bg-white border-t border-gray-200 max-h-96 overflow-y-auto;
+  }
+
+  .search-result-item {
+    @apply px-6 py-4 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0;
+  }
+
+  .search-result-title {
+    @apply font-medium text-gray-900;
+  }
+
+  .search-result-category {
+    @apply text-sm text-gray-500 mt-1;
+  }
+
+  .no-results {
+    @apply px-6 py-8 text-center text-gray-500;
+  }
+}

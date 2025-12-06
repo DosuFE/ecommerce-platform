@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* --background: #ededed; */
+  }
+}
+
+body {
+  /* background: var(--background); */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer {
+  .banner {
+    @apply flex items-start justify-center transition-all duration-700;
+  }
+}
