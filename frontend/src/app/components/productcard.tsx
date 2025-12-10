@@ -6,17 +6,28 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import '../../styles/productcard.css';
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 
-export default function ProductCard({ item }: { item: typeof products[0] }) {
+export default function ProductCard({ product }: { product: typeof products[0] }) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isFavorite, setIsFavorite] = useState(false);
 
+    const [products, setProducts] = useState([]);
+    
+    useEffect(() => {
+        async function loadProducts () {
+            const res = await fetch('http://localhost:5000/users');
+            const data = await res.json();
+            console.log("API DATA:", data);
+            setProducts(data);
+        } loadProducts();
+    }, []);
+
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % item.images.length);
+            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % product.images.length);
         }, 5000);
 
         return () => clearInterval(interval);
-    }, [item.images.length]);
+    }, [product.images.length]);
 
     const toggleFavorite = () => {
         setIsFavorite((prev) => !prev);
@@ -28,7 +39,7 @@ export default function ProductCard({ item }: { item: typeof products[0] }) {
         const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
 
         return (
-            <div className="flex items-center">
+            <div className="flex products-center">
                 {Array.from({ length: fullStars }).map((_, index) => (
                     <BsStarFill key={`full-${index}`} className="text-yellow-500" />
                 ))}
@@ -46,8 +57,8 @@ export default function ProductCard({ item }: { item: typeof products[0] }) {
         <article>
             <div className="relative w-full h-72 overflow-hidden group">
                 <Image
-                    src={item.images[currentImageIndex]}
-                    alt={item.name}
+                    src={product.images[currentImageIndex]}
+                    alt={product.name}
                     layout="fill"
                     objectFit="cover"
                     className="w-full rounded-t-lg transform transition duration-300 group-hover:scale-110"
@@ -63,32 +74,32 @@ export default function ProductCard({ item }: { item: typeof products[0] }) {
             </div>
 
             <div className="p-4 w-full">
-                <h3 className="text-xl tracking-wider">{item.name}</h3>
+                <h3 className="text-xl tracking-wider">{product.name}</h3>
                 <p className="description tracking-wider">
-                    {item.description}
+                    {product.description}
                 </p>
                 <div className="sub-container">
                     <p>
                          <span className='text-black '>Brand: </span>
-                        {item.brand}
+                        {product.brand}
                     </p>
                     <p>
                         <span className='text-black '>Category: </span>
-                        {item.category}
+                        {product.category}
                     </p>
                     <p>
                         <span className='text-black '>Price: </span>
-                        ${item.price}
+                        ${product.price}
                     </p>
                     <p>
                         <span className='text-black '>Stock: </span> 
-                        {item.stock > 0 ? `${item.stock} available` : "Out of stock"}
+                        {product.stock > 0 ? `${product.stock} available` : "Out of stock"}
                     </p>
 
-                    <p className="flex items-center">
+                    <main className="flex products-center">
                         <span className='text-black '>Rating:</span>
                         {renderRating(4.5)} 
-                    </p>
+                    </main>
                 </div>
 
                 <button className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">

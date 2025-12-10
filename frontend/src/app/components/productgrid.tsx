@@ -1,0 +1,32 @@
+'use client';
+import { useEffect, useState } from "react";
+import ProductCard from "../components/productcard";
+
+export default function ProductGrid () {
+    const [products, setProducts] = useState([]);
+    
+    useEffect(() => {
+        async function loadProducts () {
+            const res = await fetch('http://localhost:5000/users');
+            const data = await res.json();
+            console.log("API DATA:", data);
+            setProducts(data);
+        } loadProducts();
+    }, []);
+
+
+    return (
+        <>
+            <div className="mt-10 mx5 lg:mx10">
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {
+                        products.map((product: any) => (
+                            <ProductCard key={product.id} product={product} />
+                        ))
+                    }
+                </div>
+            </div>
+        </>
+    )
+}
