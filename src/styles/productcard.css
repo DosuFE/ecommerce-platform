@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@layer {
+    article {
+        @apply pb-0 w-full bg-white shadow-lg rounded-lg overflow-hidden transform transition hover:duration-300 hover:shadow-xl relative;
+    }
+
+    .fav-btn {
+        @apply absolute top-3 right-3 text-2xl text-red-500 bg-white rounded-full px-1 pt-1 shadow-md hover:scale-110 transition-transform;
+    }
+
+    .sub-container {
+        @apply flex items-center justify-start flex-wrap tracking-wider gap-x-4;
+    }
+}
+
+.description {
+    font-size: 1rem;
+    color: #4b5563; 
+}   
+
+.sub-container p {
+    font-size: 0.9rem;
+    color: #f59e0b;
+}

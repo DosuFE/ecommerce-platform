@@ -33,7 +33,7 @@ main {
     }
 }
 
-h1 {
+h1, h3 {
     font-family: 'Plus Jakarta Sans';
     font-style: italic;
 }
