@@ -9,7 +9,7 @@ export default function HomePage () {
                 <Herosection/>
             </main>
 
-            <div className="my-10 mx-5 lg:mx-12">
+            <div className="my-10 mx-5 lg:mx-0">
                 <h3 className="text-center text-3xl font-semibold">
                     New Arrivals Of Our Product Items
                 </h3>

@@ -80,7 +80,7 @@ export default function ProductCard({ product }: { product: typeof products[0] }
                 </p>
                 <div className="sub-container">
                     <p>
-                         <span className='text-black '>Brand: </span>
+                        <span className='text-black '>Brand: </span>
                         {product.brand}
                     </p>
                     <p>
