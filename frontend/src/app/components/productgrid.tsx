@@ -17,11 +17,10 @@ export default function ProductGrid () {
 
     return (
         <>
-            <div className="mt-10 mx5 lg:mx10">
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="mt-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {
-                        products.map((product: any) => (
+                        products.map((product) => (
                             <ProductCard key={product.id} product={product} />
                         ))
                     }

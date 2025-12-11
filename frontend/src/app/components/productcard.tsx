@@ -61,7 +61,7 @@ export default function ProductCard({ product }: { product: typeof products[0] }
                     alt={product.name}
                     layout="fill"
                     objectFit="cover"
-                    className="w-full rounded-t-lg transform transition duration-300 group-hover:scale-110"
+                    className="rounded-t-lg transform transition duration-300 group-hover:scale-110"
                 />
 
                 <button
@@ -73,7 +73,7 @@ export default function ProductCard({ product }: { product: typeof products[0] }
                 </button>
             </div>
 
-            <div className="p-4 w-full">
+            <div className="px-4 pb-4 w-full">
                 <h3 className="text-xl tracking-wider">{product.name}</h3>
                 <p className="description tracking-wider">
                     {product.description}
