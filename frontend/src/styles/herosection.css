@@ -1,5 +1,5 @@
-@import 'tailwindcss';
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import 'tailwindcss';
 
 main {
    background-image: radial-gradient(circle, rgb(255, 0, 0) 1.5px, transparent 1px),

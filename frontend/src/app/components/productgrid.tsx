@@ -17,11 +17,9 @@ export default function ProductGrid() {
 
   const [products, setProducts] = useState<Product[]>([]);
 
-  useEffect(() => {
+useEffect(() => {
     async function loadProducts() {
-      const res = await fetch("http://localhost:5000/users", {
-        cache: "no-store",
-      });
+      const res = await fetch("http://localhost:5000/users");
       const data = await res.json();
       console.log("API DATA:", data);
       setProducts(data);

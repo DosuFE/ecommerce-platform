@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { products } from "../lib/product";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import '../../styles/productcard.css';
@@ -9,6 +10,7 @@ import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 export default function ProductCard({ product }: { product: typeof products[0] }) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isFavorite, setIsFavorite] = useState(false);
+    const router = useRouter();
 
     const [products, setProducts] = useState([]);
     
@@ -29,8 +31,13 @@ export default function ProductCard({ product }: { product: typeof products[0] }
         return () => clearInterval(interval);
     }, [product.images.length]);
 
-    const toggleFavorite = () => {
+    const toggleFavorite = (e: React.MouseEvent) => {
+        e.stopPropagation();
         setIsFavorite((prev) => !prev);
+    };
+
+    const handleCardClick = () => {
+        router.push(`/Shop/${product.id}`);
     };
 
     const renderRating = (rating: number) => {
@@ -51,10 +58,11 @@ export default function ProductCard({ product }: { product: typeof products[0] }
         );
     }
 
-
-
     return (
-        <article>
+        <article 
+            className="cursor-pointer hover:shadow-lg transition-shadow duration-300"
+            onClick={handleCardClick}
+        >
             <div className="relative w-full h-72 overflow-hidden group">
                 <Image
                     src={product.images[currentImageIndex]}
