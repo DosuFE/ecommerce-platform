@@ -1,25 +1,66 @@
 @import "tailwindcss";
 
-@layer {
-    article {
-        @apply pb-0 w-full bg-white shadow-lg rounded-lg overflow-hidden transform transition hover:duration-300 hover:shadow-xl relative;
-    }
+@layer components {
+  .product-card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-gray-200 cursor-pointer;
+  }
 
-    .fav-btn {
-        @apply absolute top-3 right-3 text-2xl text-red-500 bg-white rounded-full px-1  shadow-md hover:scale-110 transition-transform;
-    }
+  .product-image-container {
+    @apply relative w-full aspect-square overflow-hidden;
+  }
 
-    .sub-container {
-        @apply flex items-center justify-start flex-wrap tracking-wider gap-x-4;
-    }
+  .product-image {
+    @apply object-cover transition-transform duration-500 group-hover:scale-105;
+  }
+
+  .favorite-btn {
+    @apply absolute top-3 right-3 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-md hover:scale-110 transition-all duration-200 z-10;
+  }
+
+  .product-content {
+    @apply p-4 space-y-3;
+  }
+
+  .product-name {
+    @apply text-lg font-semibold text-gray-900 line-clamp-1;
+  }
+
+  .product-description {
+    @apply text-sm text-gray-600 line-clamp-2 leading-relaxed;
+  }
+
+  .product-details {
+    @apply grid grid-cols-2 gap-2 text-sm;
+  }
+
+  .detail-item {
+    @apply flex items-center gap-1;
+  }
+
+  .detail-label {
+    @apply font-medium text-gray-700;
+  }
+
+  .detail-value {
+    @apply text-gray-600;
+  }
+
+  .rating-container {
+    @apply flex items-center gap-1;
+  }
+
+  .add-to-cart-btn {
+    @apply w-full bg-blue-600 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200 mt-4;
+  }
 }
 
-.description {
-    font-size: 1rem;
-    color: #4b5563; 
-}   
-
-.sub-container p {
-    font-size: 0.9rem;
-    color: #f59e0b;
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .product-details {
+    @apply grid-cols-1 gap-1;
+  }
+  
+  .product-content {
+    @apply p-3 space-y-2;
+  }
 }

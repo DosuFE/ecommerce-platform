@@ -46,12 +46,12 @@ export default function ProductDetails() {
     <div className="container">
       <div className="sub_container">
         <div className="space-y-4">
-          <div className="img_container">
+          <div className="img_container h-96">
             <Image
               src={product.images[currentImageIndex]}
               alt={product.name}
               fill
-              className="object-cover"
+              className="object-cover h-4/5"
             />
           </div>
           <div className="grid grid-cols-4 gap-2">

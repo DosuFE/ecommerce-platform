@@ -46,71 +46,78 @@ export default function ProductCard({ product }: { product: typeof products[0] }
         const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
 
         return (
-            <div className="flex products-center">
+            <div className="flex items-center gap-0.5">
                 {Array.from({ length: fullStars }).map((_, index) => (
-                    <BsStarFill key={`full-${index}`} className="text-yellow-500" />
+                    <BsStarFill key={`full-${index}`} className="text-yellow-400 w-3 h-3" />
                 ))}
-                {halfStar && <BsStarHalf className="text-yellow-500" />}
+                {halfStar && <BsStarHalf className="text-yellow-400 w-3 h-3" />}
                 {Array.from({ length: emptyStars }).map((_, index) => (
-                    <BsStar key={`empty-${index}`} className="text-gray-300" />
+                    <BsStar key={`empty-${index}`} className="text-gray-300 w-3 h-3" />
                 ))}
+                <span className="text-xs text-gray-500 ml-1">({rating})</span>
             </div>
         );
     }
 
     return (
         <article 
-            className="cursor-pointer hover:shadow-lg transition-shadow duration-300"
+            className="product-card group"
             onClick={handleCardClick}
         >
-            <div className="relative w-full h-72 overflow-hidden group">
+            <div className="product-image-container">
                 <Image
                     src={product.images[currentImageIndex]}
                     alt={product.name}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-t-lg transform transition duration-300 group-hover:scale-110"
+                    fill
+                    className="product-image"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
 
                 <button
                     onClick={toggleFavorite}
-                    className="fav-btn"
+                    className="favorite-btn"
                     aria-label="Add to Favorites"
                 >
-                    {isFavorite ? <AiFillHeart /> : <AiOutlineHeart />}
+                    {isFavorite ? 
+                        <AiFillHeart className="text-red-500 w-5 h-5" /> : 
+                        <AiOutlineHeart className="text-gray-600 w-5 h-5 hover:text-red-500" />
+                    }
                 </button>
             </div>
 
-            <div className="px-4 pb-4 w-full">
-                <h3 className="text-xl tracking-wider">{product.name}</h3>
-                <p className="description tracking-wider">
+            <div className="product-content">
+                <h3 className="product-name">{product.name}</h3>
+                <p className="product-description">
                     {product.description}
                 </p>
-                <div className="sub-container">
-                    <p>
-                        <span className='text-black '>Brand: </span>
-                        {product.brand}
-                    </p>
-                    <p>
-                        <span className='text-black '>Category: </span>
-                        {product.category}
-                    </p>
-                    <p>
-                        <span className='text-black '>Price: </span>
-                        ${product.price}
-                    </p>
-                    <p>
-                        <span className='text-black '>Stock: </span> 
-                        {product.stock > 0 ? `${product.stock} available` : "Out of stock"}
-                    </p>
-
-                    <main className="flex products-center">
-                        <span className='text-black '>Rating:</span>
-                        {renderRating(4.5)} 
-                    </main>
+                
+                <div className="product-details">
+                    <div className="detail-item">
+                        <span className="detail-label">Brand:</span>
+                        <span className="detail-value">{product.brand}</span>
+                    </div>
+                    <div className="detail-item">
+                        <span className="detail-label">Category:</span>
+                        <span className="detail-value">{product.category}</span>
+                    </div>
+                    <div className="detail-item">
+                        <span className="detail-label">Price:</span>
+                        <span className="detail-value font-semibold text-blue-600">${product.price}</span>
+                    </div>
+                    <div className="detail-item">
+                        <span className="detail-label">Stock:</span>
+                        <span className={`detail-value ${product.stock > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                            {product.stock > 0 ? `${product.stock} available` : "Out of stock"}
+                        </span>
+                    </div>
                 </div>
 
-                <button className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">
+                <div className="rating-container">
+                    <span className="detail-label">Rating:</span>
+                    {renderRating(product.rating || 4.5)}
+                </div>
+
+                <button className="add-to-cart-btn">
                     Add to Cart
                 </button>
             </div>

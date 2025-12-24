@@ -10,7 +10,7 @@
     }
 
     .img_container {
-        @apply relative h-96 w-full rounded-lg overflow-hidden;
+        @apply relative  w-full rounded-lg overflow-hidden;
     }
 
     .btn {
