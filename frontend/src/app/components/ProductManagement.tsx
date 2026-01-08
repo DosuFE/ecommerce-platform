@@ -90,7 +90,7 @@ export default function ProductManagement() {
   }
 
   return (
-    <div className="management-container">
+    <div className="management-container pt-32 sm:pt-24">
       <div className="header-container">
         <h1 className="title">Product Management</h1>
         <button

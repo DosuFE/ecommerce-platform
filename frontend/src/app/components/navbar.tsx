@@ -1,17 +1,40 @@
 'use client';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import '../../styles/nav.css';
 import { FiX } from "react-icons/fi";
 import { CiSearch } from "react-icons/ci";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { GrUser } from "react-icons/gr";
+import { useCart } from "./cartContext";
 
 export default function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const pathname = usePathname();
+  const router = useRouter();
+  const { getCartItemsCount } = useCart();
+  const cartItemsCount = getCartItemsCount();
+
+  // Fetch all products for search
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const res = await fetch("http://localhost:5000/users");
+        if (res.ok) {
+          const data = await res.json();
+          setAllProducts(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch products for search:", error);
+      }
+    }
+    fetchProducts();
+  }, []);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -21,11 +44,41 @@ export default function Navbar() {
     setIsSidebarOpen(false);
   };
 
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+    if (!isSearchOpen) {
+      setSearchQuery("");
+    }
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!searchQuery.trim()) return;
+
+    // Search in local products first
+    const foundProduct = allProducts.find(product =>
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    if (foundProduct) {
+      // Redirect to product detail page
+      router.push(`/Shop/${foundProduct.id}`);
+      setIsSearchOpen(false);
+    } else {
+      // Redirect to external site (Amazon search)
+      const amazonSearchUrl = `https://www.amazon.com/s?k=${encodeURIComponent(searchQuery)}`;
+      window.open(amazonSearchUrl, '_blank');
+      setIsSearchOpen(false);
+    }
+  };
+
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'Shop', href: '/Shop' },
     { name: 'Blog', href: '/blog' },
-    { name: 'Page', href: '/page' },
+    { name: 'About', href: '/About' },
   ];
 
   const isActive = (href: string) => {
@@ -67,11 +120,20 @@ export default function Navbar() {
             </div>
 
             <div className="desktop-actions">
-              <button className="action-btn" aria-label="Search">
+              <button 
+                className="action-btn cursor-pointer" 
+                aria-label="Search"
+                onClick={toggleSearch}
+              >
                 <CiSearch size={20} />
               </button>
-              <button className="action-btn" aria-label="Shopping Cart">
+              <button className="action-btn relative" aria-label="Shopping Cart">
                 <HiOutlineShoppingBag size={20} />
+                {cartItemsCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartItemsCount}
+                  </span>
+                )}
               </button>
               <button className="action-btn" aria-label="User Account">
                 <GrUser size={20} />
@@ -95,11 +157,20 @@ export default function Navbar() {
             </div>
 
             <div className="mobile-actions">
-              <button className="action-btn" aria-label="Search">
+              <button 
+                className="action-btn cursor-pointer" 
+                aria-label="Search"
+                onClick={toggleSearch}
+              >
                 <CiSearch size={20} />
               </button>
-              <button className="action-btn" aria-label="Shopping Cart">
+              <button className="action-btn relative" aria-label="Shopping Cart">
                 <HiOutlineShoppingBag size={20} />
+                {cartItemsCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartItemsCount}
+                  </span>
+                )}
               </button>
               <button className="action-btn" aria-label="User Account">
                 <GrUser size={20} />
@@ -119,6 +190,37 @@ export default function Navbar() {
           </nav>
         </div>
       </header>
+
+      {/* Search Modal */}
+      {isSearchOpen && (
+        <div className="search-modal show">
+          <div className="search-container open">
+            <div className="search-input-container">
+              <form onSubmit={handleSearch} className="search-form">
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="search-input"
+                  autoFocus
+                />
+                <button type="submit" className="search-submit-btn">
+                  <CiSearch size={20} />
+                </button>
+                <button
+                  type="button"
+                  className="search-close-btn cursor-pointer"
+                  onClick={toggleSearch}
+                  aria-label="Close search"
+                >
+                  <FiX size={20} />
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Overlay */}
       <div
@@ -163,4 +265,13 @@ export default function Navbar() {
       </div>
     </>
   );
+};
+
+// Replace `any` with a specific type for products
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  images: string[];
 }

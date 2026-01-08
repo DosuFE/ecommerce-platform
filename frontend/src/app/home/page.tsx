@@ -2,6 +2,9 @@ import Herosection from "../components/herosection";
 import '../../styles/herosection.css';
 import ProductGrid from "../components/productgrid";
 import Link from "next/link";
+import FeaturesSection from "../components/FeaturesSection";
+import NewsletterSection from "../components/NewsletterSection";
+import BlogSection from "../components/BlogSection";
 
 export default function HomePage () {
     return (
@@ -15,15 +18,23 @@ export default function HomePage () {
                     New Arrivals Of Our Product Items
                 </h3>
 
-                <ProductGrid/>
-                <Link href="/Shop" 
-                    className="mt-6 flex justify-center text-blue-600 font-medium hover:underline"
-                >
-                    Shop More
-                </Link>
+                <ProductGrid 
+                    limit={9}
+                />
+                <div className="text-center mt-8">
+                    <Link href="/Shop" 
+                        className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                    >
+                        View All Products
+                    </Link>
+                </div>
 
-                <section className="text-center bg-slate-50 text-2xl my-20 py-10">
-                    <h3 className="">Our Blog</h3>
+                {/* <BlogSection/> */}
+                <div className="my-10">
+                    <FeaturesSection/>
+                </div>
+                <section>
+                    <NewsletterSection/>
                 </section>
             </div>
         </>

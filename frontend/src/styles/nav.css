@@ -49,6 +49,11 @@
     @apply flex items-center space-x-3;
   }
 
+  /* Action Buttons */
+  .action-btn {
+    @apply p-2 text-gray-600 hover:text-gray-900 transition-colors duration-200;
+  }
+
   /* Hamburger Menu */
   .hamburger-btn {
     @apply relative w-8 h-8 flex flex-col justify-center items-center cursor-pointer;
@@ -58,16 +63,13 @@
     @apply w-6 h-0.5 bg-gray-700 rounded transition-all duration-300;
   }
 
-  .hamburger-line:nth-child(1) {
+  .hamburger-line:nth-child(1),
+  .hamburger-line:nth-child(3) {
     @apply transform-gpu;
   }
 
   .hamburger-line:nth-child(2) {
     @apply my-1.5;
-  }
-
-  .hamburger-line:nth-child(3) {
-    @apply transform-gpu;
   }
 
   /* Hamburger Animation - Open State */
@@ -81,11 +83,6 @@
 
   .hamburger-btn.open .hamburger-line:nth-child(3) {
     @apply -rotate-45 -translate-y-2;
-  }
-
-  /* Action Buttons */
-  .action-btn {
-    @apply p-2 text-gray-600 hover:text-gray-900 transition-colors duration-200;
   }
 
   /* Overlay */
@@ -144,15 +141,19 @@
   }
 
   .search-input-container {
-    @apply max-w-4xl mx-auto p-6;
+    @apply max-w-4xl mx-auto p-6 relative;
   }
 
   .search-input {
-    @apply w-full px-4 py-3 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none;
+    @apply w-full px-4 py-3 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none pr-20;
+  }
+
+  .search-submit-btn {
+    @apply absolute right-20 top-1/2 transform -translate-y-1/2 p-2 text-gray-500 hover:text-gray-700 transition-colors duration-200;
   }
 
   .search-close-btn {
-    @apply absolute top-6 right-6 p-2 text-gray-500 hover:text-gray-700 transition-colors duration-200;
+    @apply absolute right-6 top-1/2 transform -translate-y-1/2 p-2 text-gray-500 hover:text-gray-700 transition-colors duration-200;
   }
 
   /* Search Results */

@@ -6,11 +6,14 @@ import { products } from "../lib/product";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import '../../styles/productcard.css';
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
+import { useCart } from "./cartContext";
+import { log } from "console";
 
 export default function ProductCard({ product }: { product: typeof products[0] }) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isFavorite, setIsFavorite] = useState(false);
     const router = useRouter();
+    const { addToCart } = useCart();
 
     const [products, setProducts] = useState([]);
     
@@ -35,6 +38,13 @@ export default function ProductCard({ product }: { product: typeof products[0] }
         e.stopPropagation();
         setIsFavorite((prev) => !prev);
     };
+
+    const handleAddToCart = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        addToCart(product);
+        console.log('Added To Cart:', product.name);
+        
+    }
 
     const handleCardClick = () => {
         router.push(`/Shop/${product.id}`);
@@ -117,8 +127,12 @@ export default function ProductCard({ product }: { product: typeof products[0] }
                     {renderRating(product.rating || 4.5)}
                 </div>
 
-                <button className="add-to-cart-btn">
-                    Add to Cart
+                <button 
+                    className="add-to-cart-btn"
+                    onClick={handleAddToCart}
+                    disabled={product.stock === 0}
+                >
+                   {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
                 </button>
             </div>
         </article>

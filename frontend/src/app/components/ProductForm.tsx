@@ -55,14 +55,14 @@ export default function ProductForm({ product, onSubmit, onCancel, isEditing = f
   };
 
   return (
-    <div className="container bg-black/30 bg-opacity-50">
-      <div className="sub_container">
+    <div className="form_container bg-black/30 bg-opacity-50">
+      <div className="sub_form_container">
         <h2 className="form-title">
           {isEditing ? 'Edit Product' : 'Add New Product'}
         </h2>
 
         {error && (
-          <div className="error_container">
+          <div className="error_form_container">
             {error}
           </div>
         )}

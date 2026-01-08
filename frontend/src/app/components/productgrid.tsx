@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import ProductCard from "../components/productcard";
 import { Product, api } from "../lib/api";
 
-export default function ProductGrid() {
+interface ProductGridProps {
+  limit?: number;
+  category?: string;
+}
+
+export default function ProductGrid({ limit, category }: ProductGridProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
@@ -26,6 +31,12 @@ export default function ProductGrid() {
     loadProducts();
   }, []);
 
+  const filteredProducts = Array.isArray(products) 
+    ? (category ? products.filter(product => product.category === category) : products)
+  : [];
+
+  const displayedProducts = limit ? filteredProducts.slice(0, limit) : filteredProducts;
+
   if (isLoading) {
     return (
       <div className="mt-12 mx-10 flex justify-center">
@@ -46,11 +57,17 @@ export default function ProductGrid() {
 
   return (
     <div className="mt-12 mx-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {products.map((product) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {displayedProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
+      
+      {displayedProducts.length === 0 && (
+        <div className="text-center py-12">
+          <p className="text-gray-500 text-lg">No products found{category ? ` in ${category}` : ''}.</p>
+        </div>
+      )}
     </div>
   );
 }
