@@ -111,7 +111,7 @@ export default function ProductForm({ product, onSubmit, onCancel, isEditing = f
               onChange={handleChange}
               required
               className="form-input"
-              placeholder="Enter category"
+              placeholder="Enter category e.g. Electronics, Fashion, etc."
             />
           </div>
 

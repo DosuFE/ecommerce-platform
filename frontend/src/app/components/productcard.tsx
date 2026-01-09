@@ -7,7 +7,6 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import '../../styles/productcard.css';
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 import { useCart } from "./cartContext";
-import { log } from "console";
 
 export default function ProductCard({ product }: { product: typeof products[0] }) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);

@@ -127,14 +127,14 @@ export default function Navbar() {
               >
                 <CiSearch size={20} />
               </button>
-              <button className="action-btn relative" aria-label="Shopping Cart">
+              <Link href="/cart" className="action-btn relative" aria-label="Shopping Cart">
                 <HiOutlineShoppingBag size={20} />
                 {cartItemsCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {cartItemsCount}
                   </span>
                 )}
-              </button>
+              </Link>
               <button className="action-btn" aria-label="User Account">
                 <GrUser size={20} />
               </button>
@@ -164,14 +164,14 @@ export default function Navbar() {
               >
                 <CiSearch size={20} />
               </button>
-              <button className="action-btn relative" aria-label="Shopping Cart">
+              <Link href="/cart" className="action-btn relative" aria-label="Shopping Cart">
                 <HiOutlineShoppingBag size={20} />
                 {cartItemsCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {cartItemsCount}
                   </span>
                 )}
-              </button>
+              </Link>
               <button className="action-btn" aria-label="User Account">
                 <GrUser size={20} />
               </button>

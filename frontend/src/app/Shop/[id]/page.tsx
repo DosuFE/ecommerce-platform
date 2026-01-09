@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import '../../../styles/productdetails.css'
+import '../../../styles/productdetails.css';
+import { useCart } from '@/app/components/cartContext';
 
 type Product = {
   id: number;
@@ -19,6 +20,7 @@ export default function ProductDetails() {
   const [error, setError] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { addToCart } = useCart()
 
   useEffect(() => {
     async function fetchProduct() {
@@ -38,9 +40,17 @@ export default function ProductDetails() {
 
     fetchProduct();
   }, [id]);
+  
 
   if (error) return <p className="p-10 text-red-500">{error}</p>;
   if (!product) return <p className="p-10">Loading...</p>;
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    addToCart(product);
+    console.log('Added To Cart:', product.name);
+        
+  }
 
   return (
     <div className="container">
@@ -107,6 +117,7 @@ export default function ProductDetails() {
             
             <button
               className="cart_btn"
+              onClick={handleAddToCart}
               disabled={product.stock === 0}
             >
               {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}

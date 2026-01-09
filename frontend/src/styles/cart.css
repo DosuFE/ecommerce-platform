@@ -1,0 +1,19 @@
+@import 'tailwindcss';
+
+@layer {
+    .product_item {
+        @apply bg-white p-6 rounded-lg shadow-md mb-4;
+    }
+
+    .order_summary {
+        @apply bg-white p-6 rounded-lg shadow-md h-fit;
+    }
+
+    .btn_checkout {
+        @apply w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 cursor-pointer;
+    }
+
+    .container_total {
+        @apply flex justify-between font-bold text-lg border-t pt-2;
+    }
+}
