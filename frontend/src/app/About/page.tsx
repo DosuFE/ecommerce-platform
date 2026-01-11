@@ -28,7 +28,7 @@ export default function AboutPage() {
     }
   };
 
-  return (
+    return (
     <div className="min-h-screen bg-gray-50 overflow-hidden">
       {/* Parallax Background */}
       <div 

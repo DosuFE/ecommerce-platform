@@ -135,9 +135,9 @@ export default function Navbar() {
                   </span>
                 )}
               </Link>
-              <button className="action-btn" aria-label="User Account">
+              <Link href="/account" className="action-btn" aria-label="User Account">
                 <GrUser size={20} />
-              </button>
+              </Link>
             </div>
           </nav>
 
@@ -172,9 +172,9 @@ export default function Navbar() {
                   </span>
                 )}
               </Link>
-              <button className="action-btn" aria-label="User Account">
+              <Link href="/account" className="action-btn" aria-label="User Account">
                 <GrUser size={20} />
-              </button>
+              </Link>
               
               {/* Hamburger Menu Button */}
               <button
@@ -267,7 +267,6 @@ export default function Navbar() {
   );
 };
 
-// Replace `any` with a specific type for products
 interface Product {
   id: number;
   name: string;

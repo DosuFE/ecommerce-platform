@@ -15,7 +15,6 @@ export default function ShopPage () {
         const data = await api.getProducts();
         setProducts(data);
         
-        // Extract unique categories
         const uniqueCategories = Array.from(
           new Set(data.map(product => product.category))
         ).sort();

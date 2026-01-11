@@ -30,7 +30,6 @@ export default function HomePage () {
                 const res = await fetch("http://localhost:5000/users");
                 if (res.ok) {
                     const data = await res.json();
-                    // Extract unique categories
                     const uniqueCategories = Array.from(
                         new Set(data.map((product: any) => product.category))
                     ).sort();
@@ -38,7 +37,6 @@ export default function HomePage () {
                 }
             } catch (error) {
                 console.error('Error loading categories:', error);
-                // Fallback to local categories
                 const localCategories = Array.from(
                     new Set(localProducts.map(product => product.category))
                 ).sort();
@@ -55,7 +53,7 @@ export default function HomePage () {
             </main>
 
             <div className="my-10 mx-5 lg:mx-0">
-                <h3 className="text-center text-3xl font-semibold">
+                <h3 className="mb-10 text-center text-3xl font-semibold">
                     New Arrivals Of Our Product Items
                 </h3>
 
@@ -82,17 +80,23 @@ export default function HomePage () {
                         <p className="text-blue-600 font-medium">
                             {selectedCategory && `Category: ${selectedCategory}`}
                             {selectedCategory && selectedFilter && ' • '}
-                            {selectedFilter && `Filter: ${filterOptions.find(opt => opt.value === selectedFilter)?.label}`}
+                            {
+                                selectedFilter && `Filter: 
+                                ${filterOptions.find(opt => opt.value === selectedFilter)?.label}`
+                            }
                         </p>
                     </div>
                 )}
 
-                <ProductGrid 
-                    category={selectedCategory}
-                    sort={selectedSort}
-                    filter={selectedFilter}
-                    limit={9}
-                />
+                <div className="sm:mx-8">
+                    <ProductGrid 
+                        category={selectedCategory}
+                        sort={selectedSort}
+                        filter={selectedFilter}
+                        limit={12}
+                    />
+                </div>
+
 
                 <div className="text-center mt-8">
                     <Link href="/Shop" 

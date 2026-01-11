@@ -56,36 +56,31 @@ export default function ProductGrid({
     loadProducts();
   }, []);
 
-  // Filter products by category if provided
   let filteredProducts = category 
     ? products.filter(product => product.category === category)
     : products;
 
-  // Apply additional filters
   if (filter) {
     switch (filter) {
       case 'in-stock':
         filteredProducts = filteredProducts.filter(product => product.stock > 0);
         break;
       case 'new':
-        // Assuming products have a createdAt field or isNew flag
         filteredProducts = filteredProducts.filter(product => 
           product.isNew || (product.createdAt && isNewProduct(product.createdAt))
         );
         break;
       case 'popular':
-        // Filter by rating or some popularity metric
         filteredProducts = filteredProducts.filter(product => 
           product.rating && product.rating >= 4.0
-        );
+      );
         break;
-      default:
-        break;
+        default:
+      break;
     }
   }
 
-  // Apply sorting
-  let sortedProducts = [...filteredProducts];
+  const sortedProducts = [...filteredProducts];
   switch (sort) {
     case 'price-asc':
       sortedProducts.sort((a, b) => a.price - b.price);
@@ -100,16 +95,13 @@ export default function ProductGrid({
       sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
       break;
     default:
-      // Default sorting (by id or keep original order)
-      break;
+    break;
   }
 
-  // Apply limit if provided
   const displayedProducts = limit 
     ? sortedProducts.slice(0, limit)
     : sortedProducts;
 
-  // Helper function to check if product is new (within 30 days)
   function isNewProduct(createdAt: string): boolean {
     const createdDate = new Date(createdAt);
     const thirtyDaysAgo = new Date();
@@ -137,24 +129,31 @@ export default function ProductGrid({
     <div className="mt-12">
       {displayedProducts.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-600 text-lg mb-4">No products found matching your criteria</p>
-          <p className="text-gray-500">Try adjusting your filters or browse all products</p>
+          <p className="text-gray-600 text-lg mb-4">
+            No products found matching your criteria
+          </p>
+          <p className="text-gray-500">
+            Try adjusting your filters or browse all products
+          </p>
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {displayedProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard 
+                key={product.id} 
+                product={product} 
+              />
             ))}
           </div>
           
-          {limit && sortedProducts.length > limit && (
+          {/* {limit && sortedProducts.length > limit && (
             <div className="text-center mt-8">
               <p className="text-gray-600">
                 Showing {displayedProducts.length} of {sortedProducts.length} products
               </p>
             </div>
-          )}
+          )} */}
         </>
       )}
     </div>

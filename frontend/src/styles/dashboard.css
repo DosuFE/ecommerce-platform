@@ -1,0 +1,87 @@
+@import 'tailwindcss';
+
+@layer {
+    .isLoading_container {
+        @apply min-h-screen bg-gray-50 flex items-center justify-center;
+    }
+
+    .loading_spin {
+        @apply animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600;
+    }
+
+    .dashboard_container {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4;
+    }
+
+    .dashboard_container h1 {
+        @apply text-2xl font-bold text-gray-900;
+    }
+
+    .btn_logout {
+        @apply bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700;
+    }
+
+    .content_container {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:mx-8 py-8;
+    }
+
+    .content_grid_container {
+        @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+    }
+
+    h3 {
+        @apply text-lg font-semibold mb-4;
+    }
+
+    .actions_container {
+        @apply bg-white p-6 rounded-lg shadow-md;
+    }
+
+    .shop_link {
+        @apply block w-full bg-blue-600 text-white text-center py-2 px-4 rounded-md hover:bg-blue-700;
+    }
+
+    .cart_link {
+        @apply block w-full bg-green-600 text-white text-center py-2 px-4 rounded-md hover:bg-green-700;
+    }
+
+    .orders_link {
+        @apply block w-full bg-purple-600 text-white text-center py-2 px-4 rounded-md hover:bg-purple-700;
+    }
+
+    .recent_container {
+        @apply bg-white p-6 rounded-lg shadow-md;
+    }
+
+    .recent_details {
+        @apply text-sm text-gray-600;
+    }
+
+    .recent_ordersContainer {
+        @apply mt-8 bg-white p-6 rounded-lg shadow-md;
+    }
+
+    table {
+        @apply min-w-full divide-y divide-gray-200;
+    }
+
+    th {
+        @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+    }
+
+    tbody {
+        @apply bg-white divide-y divide-gray-200;
+    }
+
+    .table_data {
+        @apply px-6 py-4 whitespace-nowrap text-sm text-gray-900;
+    }
+
+    .quick_statsContainer {
+        @apply mt-8 grid grid-cols-1 md:grid-cols-3 gap-6;
+    }
+
+    .recent_orders_length {
+        @apply text-2xl font-bold text-blue-800 mb-2;
+    }
+}
