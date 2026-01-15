@@ -1,0 +1,43 @@
+@import 'tailwindcss';
+
+@layer {
+    .order_container {
+        @apply min-h-screen bg-gray-50;
+    }
+
+    .headerSub_container {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4;
+    }
+
+    .orderHistory_container {
+        @apply flex justify-between items-center;
+    }
+
+    .continueShopping_link {
+        @apply bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700;
+    }
+
+    .error_message {
+        @apply bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6;
+    }
+
+    .noOrder_title {
+        @apply text-2xl font-bold text-gray-900 mb-4;
+    }
+
+    .orderDisplay_card {
+        @apply bg-white rounded-lg shadow-md overflow-hidden;
+    }
+
+    .orderDisplay_StatusRow_Container {
+        @apply flex flex-col sm:flex-row sm:items-center sm:justify-between;
+    }
+
+    .orderDisplay_StatusRow_RightSide {
+        @apply flex items-center space-x-4 mt-2 sm:mt-0;
+    }
+
+    .link_button_orders {
+        @apply text-blue-600 hover:text-blue-700 font-medium;
+    }
+}

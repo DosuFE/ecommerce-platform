@@ -90,7 +90,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header>
+      <header className="header">
         <div className="nav-container">
           {/* Desktop Navigation */}
           <nav className="desktop-nav">

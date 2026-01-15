@@ -2,7 +2,7 @@
 
 @layer components {
   /* Header */
-  header {
+  .header {
     @apply bg-white/80 backdrop-blur-md w-full fixed top-0 z-50 shadow-sm;
   }
 

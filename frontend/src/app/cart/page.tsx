@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useCart } from "../components/cartContext";
 import { useState } from "react";
 import '../../styles/cart.css';
+import Link from "next/link";
 
 export default function CartPage() {
   const { cartItems, removeFromCart, updateQuantity, getCartTotal } = useCart();
@@ -113,7 +114,9 @@ export default function CartPage() {
                 </div>
             </div>
             <button className="btn_checkout">
-              Checkout
+              <Link href='/checkout'>
+                Checkout
+              </Link>
             </button>
           </div>
         </div>
